@@ -13,6 +13,6 @@ export const web3reducer = createSlice({
   },
 })
 
-export const { setAccount, setWeb3 } = web3reducer.actions
+export const { setAccount } = web3reducer.actions
 
 export default web3reducer.reducer

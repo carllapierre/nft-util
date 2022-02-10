@@ -1,10 +1,3 @@
-body {
-  background: #fff;
-  font-family: 'Poppins', sans-serif;
-  color: rgb(160, 160, 160);
-  margin: 0px;
-}
-
 .title-container {
   margin-top: 150px;
   margin-bottom: 90px;
@@ -34,47 +27,10 @@ body {
 
 
 /* -----NavBar section----- */
-.nav-container {
-  width: 100%;
-  position: fixed;
-  top: 0px;
-}
 
-.nav {
-  background-color: #fff;
-  padding: 15px 25px 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  box-shadow: 0px 8px 28px -22px #0000006b;
-}
-.nav > .links {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 20px;
-  transition: gap 0.3s;
-}
-.nav > .external-links{
-  justify-content: flex-end;
-}
-.nav > .internal-links{
-  padding-top: 7px;
-  justify-content: flex-start;
-}
-.nav a {
-  text-decoration: none;
-  color: rgb(160 160 160);
-  max-height: 25px;
-}
 
-@media screen and (max-width: 700px) {
-  .nav > .links{
-    gap: 10px;
-  }
-  .gw-button span{
-    display: none;
-  }
-}
+
+
 /* -----End NavBar section----- */
 
 .card-container {
@@ -99,33 +55,6 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.gw-button {
-
-  cursor: pointer;
-  border-radius: 20px;
-  padding: 5px 10px 5px 10px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  transition: all 1s ease;
-  border: 2px double transparent;
-  background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)), radial-gradient(circle at left top, rgb(218, 149, 1), rgb(217, 0, 192));
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-}
-.gw-button:hover {
-  transition: all 0.5s ease;
-  box-shadow: rgb(217, 0, 192) 0px 0px 30px -15px;
-}
-.gw-button img{
-  height: 20px;
-  width: 20px;
-  margin: 0px -2px -4px -2px;
-  filter: invert(33%) sepia(6%) saturate(7385%) hue-rotate(318deg) brightness(96%)
-}
-.gw-button span{
-  margin-left: 5px;
-  color: rgb(162 66 66);
-}
 
 .gradient-span{
   background: #FF8E0D;

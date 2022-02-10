@@ -1,4 +1,4 @@
-import { setAccount } from '../redux/web3Reducer'
+import { setAccount } from '../redux/reducers/web3Reducer'
 import store from '../redux/store';
 import configs from '../configs/vars';
 import Web3 from 'web3';
