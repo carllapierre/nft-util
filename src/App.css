@@ -1,8 +1,3 @@
-.title-container {
-  margin-top: 150px;
-  margin-bottom: 90px;
-  text-align: center;
-}
 
 .content-container {
   max-width: 50.75rem;
@@ -13,36 +8,6 @@
 .content-subtitle {
   margin-top: 0px;
   font-size: 1.2rem;
-}
-.content-title {
-  font-size: 2rem;
-}
-.content-title h1 {
-  margin: 5px;
-}
-
-.purple {
-  color: #f3cb8e;
-}
-
-
-/* -----NavBar section----- */
-
-
-
-
-/* -----End NavBar section----- */
-
-.card-container {
-  padding: 35px;
-  border: 1px solid #595f91;
-  border-radius: 30px;
-  background-color: #5149651c;
-  font-weight: 200;
-}
-.card-container h3 {
-  margin-top: 0px;
-  font-weight: 500;
 }
 
 .gw-input {
@@ -64,3 +29,4 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+

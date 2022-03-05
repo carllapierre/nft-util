@@ -1,9 +1,16 @@
+import styled from "styled-components";
 
-const Title = () => 
+const TitleCard = styled.div`
+    font-size: 1.7rem;
+    text-align: center;
+    margin: 20px;
+`
+
+const Title = ({children}) => 
 {
-    return <div className="title-container">
- 
-    </div>
+    return <TitleCard>
+        {children}
+    </TitleCard>
     
 }
 

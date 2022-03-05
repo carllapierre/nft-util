@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const CardContainer = styled.div`
+`
 
 const Container = ({children}) => 
 {
-    return <div className="card-container">
-    </div>
+    return <CardContainer >
+        {children}
+    </CardContainer>
     
 }
 

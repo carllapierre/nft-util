@@ -15,11 +15,9 @@ const NavContainer = styled.div`
     top: 0px;
 `
 const Nav = styled.div`
-    background-color: ${props => props.theme.palette.backgroundColor};
     padding: 15px 25px 15px 25px;
     display: flex;
     justify-content: space-between;
-    box-shadow: ${props => props.theme.palette.boxShadow};
 
     .links {
         display: flex;
@@ -78,12 +76,13 @@ const NavBar = () =>
             <Nav>
                 <div className='internal-links links'>
                     <a href='#'>
-                        <span className='gradient-span' style={{fontWeight: '500'}}>DAPPER</span>
+                        <span className='gradient-span' style={{fontWeight: '500'}}>LEADERBONES</span>
                     </a>
-                    <a href='#'>About</a>
-                    <a href='#' onClick={toggleTheme}>Toggle Theme</a>
+                    <a href='#'>Home</a>
+                    <a href='#'>Rankings</a>
+                    {/* <a href='#' onClick={toggleTheme}>Toggle Theme</a> */}
                 </div>
-                <div className='external-links links'>
+                {/* <div className='external-links links'>
                     <Button onClick={() => alert('redirect')} icon={Twitter}>
                         Twitter
                     </Button>
@@ -96,7 +95,8 @@ const NavBar = () =>
                                 Connect
                             </Button>
                         }
-                </div>
+                        
+                </div> */}
             </Nav>
     </NavContainer>
     

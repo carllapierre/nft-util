@@ -16,5 +16,5 @@ export const disconnectAccount= () => {
 }
 
 export const getWeb3= () => {
-    return (window.ethereum)? new Web3(window.ethereum): new Web3(configs.web3.uri)
+    return new Web3(configs.web3.uri)
 }
