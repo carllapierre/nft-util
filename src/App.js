@@ -35,7 +35,7 @@ function Context(){
     const [display, setDisplay] = React.useState("")
     const [avatar, setAvatar] = React.useState()
     const [stats, setStats] = React.useState()
-    const [loading, setLoading] = React.useState()
+    const [loading, setLoading] = React.useState(0)
     const [isFireworking, setFireworking] = React.useState(false)
     const { getNFTBalances } = useNFTBalances();
 
@@ -73,7 +73,7 @@ function Context(){
             totalNfts:0,
             totalUsd:0
         }
-        setLoading('Loading profile...')
+        setLoading(0)
         setStats({...stats, ...newStats});
         let profile = await getProfile(e);
         let nfts = await getAllNFTS(getNFTBalances, e);
@@ -107,7 +107,7 @@ function Context(){
                 }
                 newStats.totalCounted = newStats.totalCounted+collection.total;
                 setStats({...stats, ...newStats});
-                setLoading(`${newStats?.totalCounted ?? 0}/${newStats?.totalNfts ?? 0}`)
+                setLoading((newStats?.totalCounted ?? 0)/(newStats?.totalNfts ?? 0)*100)
             }
         }else
             alert('An unknown error occured. ngmi.')
