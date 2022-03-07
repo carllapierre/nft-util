@@ -19,8 +19,8 @@ const MainContainer = styled.div`
 `
 
 const Header = styled.div`
-    padding: 20px;
-    height: 60px;
+    padding: 20px 20px 5px 20px;
+    height: 80px;
     border-bottom: 3px solid #ddd
 `
 const Body = styled.div`
@@ -35,14 +35,9 @@ const Avatar = styled.img`
     position: relative;
     border: 3px solid #ddd;
     border-radius: 59px;
-    margin-left: 3%;
-    margin-top: 2%;
-`
-const Loader = styled.div`
-    color: #cdcbcb;
-    /* margin-top: 10px; */
-    padding-top: 43px;
-    font-size: 14px;
+    margin-right: 7px;
+    margin-left: 12%;
+    margin-top: 4%;
 `
 
 const TopBar = styled.div`
@@ -128,7 +123,26 @@ const DonateIcon= styled.div`
     }
 `
 
-const Container = ({children, walletInput, avatar, loading}) => 
+const HeaderContent = styled.div`
+    display: flex;
+    gap: 20px;
+    height: 100%;
+`
+
+const SocialContainer = styled.div`
+    overflow: hidden;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: flex-end;
+    gap: 10px;
+`
+
+const SocialItem = styled.div`
+
+`
+
+const Container = ({children, walletInput, avatar, loading, display}) => 
 {
     return <MainContainer >
         <Inner>
@@ -140,7 +154,14 @@ const Container = ({children, walletInput, avatar, loading}) =>
                 <LoadingBarInner style={{width: loading + '%'}}/>
             </LoadingBarOutter>
             <Header>
-                 <Avatar src={avatar ?? EmptyAvatar}/>
+                 <HeaderContent>
+                    <div>
+                        <Avatar src={avatar ?? EmptyAvatar}/>
+                    </div>
+                    <SocialContainer>
+                        <SocialItem><span style={{fontSize: '21px',color: 'rgb(143 143 143)'}}>{display}</span></SocialItem>
+                    </SocialContainer>
+                 </HeaderContent>
             </Header>
             <Body>
                 {children}

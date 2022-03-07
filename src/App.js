@@ -1,6 +1,6 @@
 import './App.css';
 import styled from 'styled-components';
-import { GlobalStyle, Input, Container, Title, MainContainer, Fireworks} from './components/components'
+import { GlobalStyle, Input, Container, Card, MainContainer, Fireworks} from './components/components'
 import React from 'react';
 import { Provider } from 'react-redux'
 import store from './redux/store'
@@ -53,7 +53,6 @@ function Context(){
         if(web3?.utils.isAddress(e)){
             setWallet(e);
             //has ENS?
-            setDisplay(e)
         }
         let ensCheck = e.split('.');
         if(ensCheck.length > 1){
@@ -61,7 +60,6 @@ function Context(){
                 let address = await web3.eth.ens.getAddress(e)
                 if(address) {
                     setWallet(address);
-                    setDisplay(e)
                 }
             }
         }
@@ -81,8 +79,9 @@ function Context(){
         setLoading(0)
         setStats({...stats, ...newStats});
         let profile = await getProfile(e);
-        let nfts = await getAllNFTS(getNFTBalances, e);
         setAvatar(profile?.account?.profile_img_url)
+        setDisplay(profile?.username ?? e)
+        let nfts = await getAllNFTS(getNFTBalances, e);
 
         if(nfts){
             var disctinctCollections = getDistinctCollections(nfts)
@@ -123,29 +122,33 @@ function Context(){
     let formatValue = (value) => value.toFixed(2);
     return <>
                 <GlobalStyle/>
-                <MainContainer fire={fire} loading={loading} avatar={avatar} walletInput={<Input
+                <MainContainer display={display} loading={loading} avatar={avatar} walletInput={<Input
                                 placeholder='Wallet address or ENS...'
                                 type="text" 
                                 onChange={(e)=> onInputChange(e.target.value)}
                                 value={input}
+                                
                             />}>
-                        <div>
-                            Wallet: {display}
-                        </div>
-                        {
-                            stats?.tokens.map(token => {
-                                return <div key={token.symbol}>
-                                    Total NFTs in {token.symbol}: <AnimatedNumber duration={duration} value={token.total} formatValue={formatValue}/>
-                                    <span><img style={{width: TOKEN_SIZE, height: TOKEN_SIZE, marginBottom: '-2px', marginLeft: '3px'}} src={token.img} alt={token.symbol}/></span>
-                                </div>
-                            })
-                        }
-                        <div>
-                            Total in USD: $<AnimatedNumber duration={duration} value={stats?.totalUsd ?? 0} formatValue={formatValue}/>
-                        </div>
-                        <div>
-                            {`${stats?.totalCounted ?? 0}/${stats?.totalNfts ?? 0}`}
-                        </div>                        
+                                {stats? <Card>
+                                {
+                                    stats?.tokens.map(token => {
+                                        return <div key={token.symbol}>
+                                            Total NFTs in {token.symbol}
+                                            <br/>
+                                            <AnimatedNumber duration={duration} value={token.total} formatValue={formatValue}/>
+                                            <span><img style={{width: TOKEN_SIZE, height: TOKEN_SIZE, marginBottom: '-2px', marginLeft: '3px'}} src={token.img} alt={token.symbol}/></span>
+                                        </div>
+                                    })
+                                    }
+                                    <div>
+                                        Total in USD <br/>
+                                        $<AnimatedNumber duration={duration} value={stats?.totalUsd ?? 0} formatValue={formatValue}/>
+                                    </div>
+                                    <div>
+                                        <br/>
+                                        {`${stats?.totalCounted ?? 0}/${stats?.totalNfts ?? 0}`}
+                                    </div>       
+                                </Card>:null}
                 </MainContainer>
                 <Fireworks isFireworking={isFireworking}/>
             </>
