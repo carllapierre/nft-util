@@ -112,7 +112,7 @@ const Container = ({children, walletInput, avatar, loading}) =>
             </Body>
             <Footer>
                 <Icon src={Twitter} alt='Twitter' onClick={()=> window.open('https://twitter.com/0xWhiskyy')}/>
-                <Icon src={Github} alt='Github' onClick={()=> window.open('https://github.com/carllapierre')}/>                
+                <Icon src={Github} alt='Github' onClick={()=> window.open('https://github.com/0xCarll/nft-util')}/>                
             </Footer>
         </Inner>
     </MainContainer>
