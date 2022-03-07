@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import EmptyAvatar from '../content/images/empty.png'
 import Twitter from '../content/svg/twitter.svg'
 import Github from '../content/svg/github.svg'
+import Heart from '../content/svg/heart.svg'
 
 const Inner = styled.div`
     background-color: #fff;
@@ -89,6 +90,44 @@ const LoadingBarInner = styled.div`
     transition: width 1s ease-in-out;
 `
 
+const DonateInput = styled.input`
+    border-radius: 0px 7px 7px 0px;
+    border-right: 1px;
+    border-top: 1px;
+    border-left: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #ddd;
+
+    padding: 10px;
+    font-size: 14px;
+    color: #fff;
+    float: right;
+    text-overflow: ellipsis;
+
+    margin-right: 10px;
+
+    &:hover{
+        cursor: pointer;
+    }
+`
+const DonateIcon= styled.div`
+
+    border-radius: 7px 0px 0px 7px;
+    border: 1px solid #ddd;
+    padding: 8px 9px 5px 9px;
+    float: left;
+
+    img{
+        height: 20px;
+        filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(201deg) brightness(106%) contrast(106%);
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
+`
+
 const Container = ({children, walletInput, avatar, loading}) => 
 {
     return <MainContainer >
@@ -102,15 +141,19 @@ const Container = ({children, walletInput, avatar, loading}) =>
             </LoadingBarOutter>
             <Header>
                  <Avatar src={avatar ?? EmptyAvatar}/>
-                {/*<TopBar>
-                    {walletInput}
-                    {loading? <Loader>{loading}</Loader>:null}
-                </TopBar> */}
             </Header>
             <Body>
                 {children}
             </Body>
             <Footer>
+                <div onClick={() => {
+                        navigator.clipboard.writeText('0x079CbeAd4cfb77251261d853A3880859E79f1D14')
+                    }}>
+                    <DonateIcon>
+                        <img src={Heart} alt='copy'/>
+                    </DonateIcon>
+                    <DonateInput disabled value={'0x079CbeAd4cfb77251261d853A3880859E79f1D14'}/>
+                </div>
                 <Icon src={Twitter} alt='Twitter' onClick={()=> window.open('https://twitter.com/0xWhiskyy')}/>
                 <Icon src={Github} alt='Github' onClick={()=> window.open('https://github.com/0xCarll/nft-util')}/>                
             </Footer>

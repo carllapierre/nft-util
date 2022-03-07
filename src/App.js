@@ -43,6 +43,11 @@ function Context(){
         setWeb3(getWeb3())
     }, []);
 
+    const fire = () => {
+        setFireworking(true)
+        setFireworking(false)  
+    }
+
     const onInputChange = async (e) => {
         setInput(e);
         if(web3?.utils.isAddress(e)){
@@ -112,14 +117,13 @@ function Context(){
         }else
             alert('An unknown error occured. ngmi.')
   
-        setFireworking(true)
-        setFireworking(false)  
+        fire()
     }
 
     let formatValue = (value) => value.toFixed(2);
     return <>
                 <GlobalStyle/>
-                <MainContainer loading={loading} avatar={avatar} walletInput={<Input
+                <MainContainer fire={fire} loading={loading} avatar={avatar} walletInput={<Input
                                 placeholder='Wallet address or ENS...'
                                 type="text" 
                                 onChange={(e)=> onInputChange(e.target.value)}
@@ -139,9 +143,9 @@ function Context(){
                         <div>
                             Total in USD: $<AnimatedNumber duration={duration} value={stats?.totalUsd ?? 0} formatValue={formatValue}/>
                         </div>
-                        {/* <div>
+                        <div>
                             {`${stats?.totalCounted ?? 0}/${stats?.totalNfts ?? 0}`}
-                        </div>                         */}
+                        </div>                        
                 </MainContainer>
                 <Fireworks isFireworking={isFireworking}/>
             </>
