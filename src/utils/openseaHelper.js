@@ -29,7 +29,7 @@ export async function getStats(slug) {
     let stats, res;
     
     try{
-        res = await fetch(configs.opensea.uri + `collection/${slug}`);;
+        res = await fetch(configs.opensea.uri + `api/v1/collection/${slug}`);;
     }
     catch (e){}
 
@@ -69,7 +69,7 @@ export async function getProfile(address) {
     let profile, res;
     
     try{
-        res = await fetch(configs.opensea.uri + `user/${address}`);;
+        res = await fetch(configs.opensea.uri + `api/v1/user/${address}`);;
     }
     catch (e){}
 
