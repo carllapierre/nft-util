@@ -10,5 +10,8 @@ module.exports = {
     },
     opensea: {
       uri: process.env.REACT_APP_OS,
+    },
+    nametag: {
+      uri: process.env.REACT_APP_NT,
     }
   };

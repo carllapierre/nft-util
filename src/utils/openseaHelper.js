@@ -7,7 +7,7 @@ export async function getSlug(collectionToken) {
 
     let slug,res;
     try{
-        res = await fetch(configs.opensea.uri + `api/v1/assets?asset_contract_address=${collectionToken}&limit=1`)
+        res = await fetch(configs.opensea.uri + `assets?asset_contract_address=${collectionToken}&limit=1`)
     }
     catch (e){}
 
@@ -29,7 +29,7 @@ export async function getStats(slug) {
     let stats, res;
     
     try{
-        res = await fetch(configs.opensea.uri + `api/v1/collection/${slug}`);;
+        res = await fetch(configs.opensea.uri + `collection/${slug}`);;
     }
     catch (e){}
 
@@ -69,7 +69,7 @@ export async function getProfile(address) {
     let profile, res;
     
     try{
-        res = await fetch(configs.opensea.uri + `api/v1/user/${address}`);;
+        res = await fetch(configs.opensea.uri + `user/${address}`);;
     }
     catch (e){}
 

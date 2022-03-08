@@ -1,14 +1,13 @@
 import './App.css';
-import styled from 'styled-components';
-import { GlobalStyle, Input, Container, Card, MainContainer, Fireworks} from './components/components'
+import { GlobalStyle, Input, Card, MainContainer, Fireworks} from './components/components'
 import React from 'react';
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import Footer from './components/Footer';
 import { getWeb3 } from './utils/web3Helper';
-import { MoralisProvider, useNFTBalances, useEnsName as getENSAddress } from "react-moralis";
+import { MoralisProvider, useNFTBalances } from "react-moralis";
 import { getDistinctCollections, getAllNFTS } from './utils/moralisHelper';
-import { getSlug, getStats, getProfile } from './utils/openseaHelper';
+import { getProfile as getOpenseaProfile, getSlug, getStats } from './utils/openseaHelper';
+import { getProfile as getNametagProfile } from './utils/nametagHelper';
 import AnimatedNumber from "animated-number-react";
 import configs from './configs/vars';
 
@@ -32,6 +31,7 @@ function Context(){
     const [web3, setWeb3] = React.useState()
     const [input, setInput] = React.useState("")
     const [wallet, _setWallet] = React.useState("")
+    const [profile, setProfile] = React.useState();
     const [display, setDisplay] = React.useState("")
     const [avatar, setAvatar] = React.useState()
     const [stats, setStats] = React.useState()
@@ -66,6 +66,30 @@ function Context(){
 
     }
 
+    const loadProfile = async (address)=> {
+
+        //opensea first!
+        let osProfile = await getOpenseaProfile(address);
+        let profile;
+        if(osProfile){
+            profile = {
+                username: osProfile?.username ?? address,
+                avatar: osProfile?.account?.profile_img_url
+            }
+            setProfile(profile)
+        }
+
+        //nametag
+        let ntProfile = await getNametagProfile(address);
+        if(ntProfile.nametag){
+            profile = {
+                ...profile,  
+                nametag: '@'+ntProfile.nametag?.profileName
+            }
+            setProfile(profile)
+        }
+    }
+
     const setWallet = async (e) => {
         //get stuff from openSea
         _setWallet(e);
@@ -78,9 +102,8 @@ function Context(){
         }
         setLoading(0)
         setStats({...stats, ...newStats});
-        let profile = await getProfile(e);
-        setAvatar(profile?.account?.profile_img_url)
-        setDisplay(profile?.username ?? e)
+        loadProfile(e);
+
         let nfts = await getAllNFTS(getNFTBalances, e);
 
         if(nfts){
@@ -122,7 +145,7 @@ function Context(){
     let formatValue = (value) => value.toFixed(2);
     return <>
                 <GlobalStyle/>
-                <MainContainer display={display} loading={loading} avatar={avatar} walletInput={<Input
+                <MainContainer  profile={profile} loading={loading} walletInput={<Input
                                 placeholder='Wallet address or ENS...'
                                 type="text" 
                                 onChange={(e)=> onInputChange(e.target.value)}

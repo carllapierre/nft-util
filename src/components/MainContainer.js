@@ -31,7 +31,10 @@ const Body = styled.div`
 
 
 const Avatar = styled.img`
+
+    background-color: #fff;
     width: 110px;
+    height: 110px;
     position: relative;
     border: 3px solid #ddd;
     border-radius: 59px;
@@ -97,10 +100,9 @@ const DonateInput = styled.input`
     padding: 10px;
     font-size: 14px;
     color: #fff;
-    float: right;
     text-overflow: ellipsis;
+    width: 100%;
 
-    margin-right: 10px;
 
     &:hover{
         cursor: pointer;
@@ -111,7 +113,7 @@ const DonateIcon= styled.div`
     border-radius: 7px 0px 0px 7px;
     border: 1px solid #ddd;
     padding: 8px 9px 5px 9px;
-    float: left;
+    width: 20px;
 
     img{
         height: 20px;
@@ -142,7 +144,12 @@ const SocialItem = styled.div`
 
 `
 
-const Container = ({children, walletInput, avatar, loading, display}) => 
+const DonateContainer = styled.div`
+    display: flex;
+    margin-right: 10px;
+`
+
+const Container = ({children, walletInput, loading, profile}) => 
 {
     return <MainContainer >
         <Inner>
@@ -156,10 +163,13 @@ const Container = ({children, walletInput, avatar, loading, display}) =>
             <Header>
                  <HeaderContent>
                     <div>
-                        <Avatar src={avatar ?? EmptyAvatar}/>
+                        <Avatar src={profile?.avatar ?? EmptyAvatar}/>
                     </div>
                     <SocialContainer>
-                        <SocialItem><span style={{fontSize: '21px',color: 'rgb(143 143 143)'}}>{display}</span></SocialItem>
+                        <SocialItem>
+                            <div style={{fontSize: '21px',color: 'rgb(139 184 243)', fontFamily: '\'Space Mono\', monospace'}}>{profile?.nametag}</div>
+                            <div style={{fontSize: '21px',color: 'rgb(143 143 143)'}}>{profile?.username}</div>
+                        </SocialItem>
                     </SocialContainer>
                  </HeaderContent>
             </Header>
@@ -167,14 +177,14 @@ const Container = ({children, walletInput, avatar, loading, display}) =>
                 {children}
             </Body>
             <Footer>
-                <div onClick={() => {
+                <DonateContainer onClick={() => {
                         navigator.clipboard.writeText('0x079CbeAd4cfb77251261d853A3880859E79f1D14')
                     }}>
                     <DonateIcon>
                         <img src={Heart} alt='copy'/>
                     </DonateIcon>
                     <DonateInput disabled value={'0x079CbeAd4cfb77251261d853A3880859E79f1D14'}/>
-                </div>
+                </DonateContainer>
                 <Icon src={Twitter} alt='Twitter' onClick={()=> window.open('https://twitter.com/0xWhiskyy')}/>
                 <Icon src={Github} alt='Github' onClick={()=> window.open('https://github.com/0xCarll/nft-util')}/>                
             </Footer>
